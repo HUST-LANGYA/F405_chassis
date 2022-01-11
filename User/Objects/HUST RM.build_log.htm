@@ -21,16 +21,26 @@ Target DLL:      Segger\JL2CM3.dll V2.99.29.0
 Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
-D:\Robomaster\Infantry\F405_SuperPower\User\HUST RM .uvprojx
+D:\Robomaster\Infantry\F405_SuperPower\F405_chassis\User\HUST RM .uvprojx
 Project File Date:  12/24/2021
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'F:\ARM\ARMCC\Bin'
 Build target 'Target 1'
+compiling PowerControlTask.c...
+..\Task\PowerControlTask.c(84): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	temp_temperature = (1.43-temp_temperature)/0.0043+25;
+..\Task\PowerControlTask.c(86): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	AD_actual_value = UCAP*7.8;
+..\Task\PowerControlTask.c(183): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	DAC_Set = I_Set/10.0*2/3.3*4096;
+..\Task\PowerControlTask.c(16): warning:  #550-D: variable "tx_message"  was set but never used
+  static CanTxMsg tx_message;
+..\Task\PowerControlTask.c: 4 warnings, 0 errors
 compiling ChassisTask.c...
 linking...
-Program Size: Code=30576 RO-data=1220 RW-data=892 ZI-data=13852  
-".\Objects\HUST RM.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=30684 RO-data=1220 RW-data=892 ZI-data=13892  
+".\Objects\HUST RM.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -44,7 +54,7 @@ Package Vendor: Keil
   F:\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

@@ -13,7 +13,7 @@ float temperate,temp3v3;
 float I_Set = 0;
 Pid_Typedef ChargeCtl;
 enum POWERSTATE_Typedef PowerState = BAT;
-
+static CanTxMsg tx_message;
 extern unsigned short ADC_ConvertedValue[90];
 extern INA260 INA260_1,INA260_2;
 extern F405_typedef F405;
@@ -183,6 +183,8 @@ void Charge_Set(float I_Set)
 	DAC_Set = I_Set/10.0*2/3.3*4096;
 	DAC_Set = LIMIT_MAX_MIN(DAC_Set,4096,0);
 	DAC_SetChannel2Data(DAC_Align_12b_R,DAC_Set);
+	tx_message.Data[1]=DAC_Set>>8;
+	tx_message.Data[2]=DAC_Set;
 }
 
 
@@ -273,6 +275,11 @@ void ChargeControl(void)
 uint32_t PowerControl_high_water;
 void PowerControl_task(void *pvParameters)
 {
+  tx_message.IDE = CAN_ID_STD;    
+  tx_message.RTR = CAN_RTR_DATA; 
+  tx_message.DLC = 0x08;    
+  tx_message.StdId = 0x072;
+	tx_message.Data[0]=0x72;
    while (1) {
 			/******************数据获取*******************/
 			INA_READ_Vol();			

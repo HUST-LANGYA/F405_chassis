@@ -17,6 +17,7 @@ F405_typedef F405;
 RM820RReceive_Typedef ChassisMotorCanReceive[4];
 ChassisSpeed_t chassis;
 extern short Judgement_DisConnect;
+extern float AD_actual_value;
 /**********************************************************************************************************
 *函 数 名: Can1Receive0
 *功能说明: can1接收函数，接收电调传回的速度，电流值
@@ -102,6 +103,9 @@ void Can2Receive1(CanRxMsg *rx_message)
 			F405.Laser_Flag = (F405.Send_Pack1>>1)&0x01;
 			F405.Graphic_Init_Flag = (F405.Send_Pack1>>2)&0x01;
 			F405.Follow_state = (F405.Send_Pack1>>3)&0x01;
+		break;
+		case 0x072:
+			memcpy(&AD_actual_value, &rx_message->Data[0], 4);
 		break;
 	}
 }

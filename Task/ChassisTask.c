@@ -597,14 +597,27 @@ void Chassis_task(void *pvParameters)
 {
   portTickType xLastWakeTime;
 	const portTickType xFrequency = 1;
-	
+	static CanTxMsg tx_message;
+  tx_message.IDE = CAN_ID_STD;    
+  tx_message.RTR = CAN_RTR_DATA; 
+  tx_message.DLC = 0x08;    
+  tx_message.StdId = 0x072;
+	tx_message.Data[0]=0xaf;
   while (1) {
     
 		//电容充放电控制
 		if(JudgeReceive.remainEnergy < 30)
-			Charge_Off;
+		{
+		Charge_Off;
+		tx_message.Data[1]=0x00;
+    }
 		else
-			Charge_On;
+		{
+		Charge_On;
+		tx_message.Data[1]=0x01;
+		}
+		
+	  CAN_Transmit(CAN2,&tx_message);
 		
 		//功率限制
     Chassis_CurrentPid_Cal();

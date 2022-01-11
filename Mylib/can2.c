@@ -66,9 +66,9 @@ void CAN2_Configuration()
 		
 		CAN_FilterInitStructure.CAN_FilterNumber=14;	// 
 		CAN_FilterInitStructure.CAN_FilterMode=CAN_FilterMode_IdList;	 // 标识符列表模式
-		CAN_FilterInitStructure.CAN_FilterScale=CAN_FilterScale_32bit;   // 16位过滤器
+		CAN_FilterInitStructure.CAN_FilterScale=CAN_FilterScale_16bit;   // 16位过滤器
 		CAN_FilterInitStructure.CAN_FilterIdHigh=0x101 << 5;			// 过滤器标识符
-		CAN_FilterInitStructure.CAN_FilterIdLow=0 | CAN_ID_STD;				
+		CAN_FilterInitStructure.CAN_FilterIdLow=0x072<<5 | CAN_ID_STD;				
 		CAN_FilterInitStructure.CAN_FilterMaskIdHigh=0x102 << 5;		
 		CAN_FilterInitStructure.CAN_FilterMaskIdLow=0 | CAN_ID_STD;
 		CAN_FilterInitStructure.CAN_FilterFIFOAssignment=CAN_FIFO1;	 // FIFO1指向过滤器
